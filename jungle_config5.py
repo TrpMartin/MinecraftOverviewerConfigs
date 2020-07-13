@@ -1,4 +1,4 @@
-### MTBO config file
+### MO config file for jungle map in raspi server
 import sys
 #add my markers
 sys.path.append("/home/pi/Minecraft-Overviewer/") # so python can find my_markers file
@@ -16,8 +16,7 @@ worlds["jungle"] = "/home/pi/.minecraft/saves/jungle_world/"
 outputdir = "/home/pi/www/jungle_map_cropped"
 
 
-## does this fix the black spots?
-## jar von mojang server jar runtergeladen
+## server jar downloaded from mojang website, unsure if necessary, still getting black spots
 texturepath = "/home/pi/.minecraft/versions/1.16/1.16.1.jar"
 
 ## This is an item usually specified in a renders dictionary below, but if you
@@ -144,7 +143,7 @@ renders["Tag"] = {
 #        "rendermode": cave,
 #        "dimension": "overworld",
 ##        "overlay" : ["jungle", worlds], # from web but results in syntax error
-#        'markers': [dict(name="All signs", filterFunction=signFilter),
+#        "markers": [dict(name="All signs", filterFunction=signFilter),
 #                    dict(name="Chests", filterFunction=chestFilter, icon="icons/my_chest.png", createInfoWindow=True),
 #                    dict(name="Players", filterFunction=playerIcons, createInfoWindow=True)]
 #}
@@ -154,23 +153,26 @@ renders["Nacht"] = {
         "world": "jungle",
         "title": "Dschungel Nacht",
         "dimension": "overworld",
+        "crop": (-500,-500,500,500), # set a 1000x1000 tile boundary for smaller map to faster render test stuff
         #"rendermode": "smooth_night",
         "rendermode": "night",
 }
 
 
-renders['biomeover'] = {
-    'world': 'jungle',
-    'rendermode': [ClearBase(), BiomeOverlay()],
-    'title': "Biome Coloring Overlay",
-    'overlay': ['Tag']
+renders["biomeover"] = {
+    "world": "jungle",
+    "rendermode": [ClearBase(), BiomeOverlay()],
+    "crop": (-500,-500,500,500), # set a 1000x1000 tile boundary for smaller map to faster render test stuff
+    "title": "Biome Coloring Overlay",
+    "overlay": ['Tag']
 }
 
-renders['mineralover'] = {
-    'world': 'jungle',
-    'rendermode': [ClearBase(), MineralOverlay()],
-    'title': "Mineral Overlay",
-    'overlay': ['Tag']
+renders["mineralover"] = {
+    "world": "jungle",
+    "rendermode": [ClearBase(), MineralOverlay()],
+    "crop": (-500,-500,500,500), # set a 1000x1000 tile boundary for smaller map to faster render test stuff
+    "title": "Mineral Overlay",
+    "overlay": ['Tag']
 }
 
 
@@ -178,19 +180,19 @@ renders['mineralover'] = {
 renders["Nether"] = {
         "world": "jungle",
         "title": "Dschungel Nether",
-        'dimension': 'nether',
-        'crop': (-500,-500,500,500),
-##        'rendermode': nether_smooth_lighting, # das kann das problem mit dem nether sein
+        "dimension": "nether",
+        "crop": (-500,-500,500,500),
+##        "rendermode": nether_smooth_lighting, # das kann das problem mit dem nether sein
         "rendermode": "nether",
 }
 
 ## The End!
 renders["The End"] = {
-        'world': 'jungle',
-        'title': 'Dschungel The End',
-        'dimension': 'end',
+        "world": "jungle",
+        "title": "Dschungel - The End",
+        "dimension": "end",
         "crop": (-500,-500,500,500),
-        #'rendermode': end_smooth_lighting, # defined on top of this file, gab black spots
+        #"rendermode": end_smooth_lighting, # defined on top of this file, gab black spots
         "rendermode": "normal",
 }
 
